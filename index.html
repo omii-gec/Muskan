@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background: radial-gradient(circle at top, #ffe0ec, #ffa3b6);
+      overflow-x: hidden;
+      text-align: center;
+      padding: 20px;
+      color: #222;
+    }
+
+    header {
+      padding-top: 50px;
+      color: #f434e4;
+    }
+
+    header h1 {
+      font-size: 2.2em;
+      font-weight: 600;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    header p {
+      font-size: 1.05em;
+      max-width: 90%;
+      margin: auto;
+    }
+
+    .slider-wrapper {
+      width: 100%;
+      overflow: hidden;
+      margin-top: 30px;
+    }
+
+    .slider {
+      display: flex;
+      animation: slide 25s linear infinite;
+      gap: 15px;
+      padding-left: 10px;
+    }
+
+    .slider img {
+      width: 80vw;
+      max-width: 300px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .slider img:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .btn {
+      margin-top: 30px;
+      padding: 12px 25px;
+      background: #ff5f7e;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: white;
+      transition: background 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 95, 126, 0.6);
+    }
+
+    .btn:hover {
+      background: #ff2f5d;
+    }
+
+    #surpriseMessage {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: #8509f9;
+      opacity: 0;
+      transition: opacity 1s ease;
+      padding: 0 10px;
+    }
+
+    .fade-in-surprise {
+      opacity: 1 !important;
+    }
+
+    .background-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background-color: #d7576e;
+      transform: rotate(45deg);
+      animation: float 10s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background-color: #d95069;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -6px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -6px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    @media (min-width: 600px) {
+      header h1 {
+        font-size: 2.8em;
+      }
+
+      header p {
+        font-size: 1.2em;
+      }
+
+      .slider img {
+        width: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-hearts"></div>
+
+  <header>
+    <h1>🎂 Happy Birthday, Cutie! 🎉💖</h1>
+    <p>May your day be filled with sunshine, laughter, and sweet moments. You deserve the best today and always! ✨</p>
+  </header>
+
+  <section class="slider-wrapper">
+    <div class="slider">
+      <img src="img1.jpg" alt="Photo 1" />
+      <img src="img2.jpg" alt="Photo 2" />
+      <img src="img3.jpg" alt="Photo 3" />
+      <img src="img4.jpg" alt="Photo 4" />
+      <img src="img5.jpg" alt="Photo 5" />
+      <img src="img6.jpg" alt="Photo 6" />
+      <img src="img7.jpg" alt="Photo 7" />
+    </div>
+  </section>
+
+  <button id="surpriseBtn" class="btn">Click for Surprise 🎁</button>
+  <div id="surpriseMessage">💌 You deserve all the love in the world. I'm lucky to know you. 💖</div>
+
+  <!-- Confetti Script -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    // Confetti & message reveal
+    const btn = document.getElementById('surpriseBtn');
+    const msg = document.getElementById('surpriseMessage');
+
+    btn.addEventListener('click', () => {
+      confetti({
+        particleCount: 150,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
+      msg.classList.add('fade-in-surprise');
+      btn.style.display = 'none';
+    });
+
+    // Floating hearts
+    const bg = document.querySelector('.background-hearts');
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = `${Math.random() * 100}%`;
+      heart.style.animationDuration = `${6 + Math.random() * 6}s`;
+      heart.style.animationDelay = `${Math.random() * 5}s`;
+      bg.appendChild(heart);
+    }
+  </script>
+</body>
+</html>
